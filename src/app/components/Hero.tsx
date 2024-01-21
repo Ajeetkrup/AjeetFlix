@@ -14,7 +14,7 @@ const Hero = ({ title, imageUrl }: { title: string; imageUrl: string }) => {
           and find your new favorite today.
         </p>
         <Link href="/movies">
-          <button className="p-2 rounded-[1.25rem] border-black border-2 bg-white hover:bg-slate-200 my-4">
+          <button className="p-2 bg-slate-950 text-slate-50 hover:bg-slate-100 hover:text-slate-950 hover:border-2 hover:border-slate-950 rounded-[1.5rem]">
             Explore Movies
           </button>
         </Link>
