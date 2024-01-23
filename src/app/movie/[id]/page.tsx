@@ -18,6 +18,7 @@ const DynamicMovie = async ({ params }: { params: { id: string } }) => {
     const res = await fetch(url, options);
     const data = await res.json();
     movie = data[0]?.details;
+    console.log("movie ---", movie);
   } catch (err) {
     console.log(err);
   }
