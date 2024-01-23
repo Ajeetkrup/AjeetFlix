@@ -5,7 +5,6 @@ const Movie = async () => {
   const RAPID_API_KEY = process.env.RAPID_API_KEY ?? "";
   const RAPID_API_ENDPOINT = process.env.RAPID_API_ENDPOINT ?? "";
   const url = RAPID_API_URL ?? "";
-  console.log(RAPID_API_URL, RAPID_API_KEY, RAPID_API_ENDPOINT, url);
   const options = {
     method: "GET",
     headers: {
@@ -19,7 +18,6 @@ const Movie = async () => {
     const res = await fetch(url, options);
     const data = await res.json();
     movies = data?.titles;
-    console.log("called movies --- ", movies);
   } catch (err) {
     console.log(err);
   }
