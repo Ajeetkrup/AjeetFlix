@@ -1,8 +1,6 @@
-import { resolve } from "path";
 import MovieCard from "../components/MovieCard";
 
 const Movie = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   const RAPID_API_URL = process.env.RAPID_API_URL ?? "";
   const RAPID_API_KEY = process.env.RAPID_API_KEY ?? "";
   const RAPID_API_ENDPOINT = process.env.RAPID_API_ENDPOINT ?? "";
