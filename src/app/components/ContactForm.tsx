@@ -8,6 +8,7 @@ const ContactForm = () => {
     phone: "",
     message: "",
   });
+  const [status, setStatus] = useState("");
 
   const handleChange = (e: {
     target: { name: string; value: string | number };
@@ -16,11 +17,34 @@ const ContactForm = () => {
     const value = e.target.value;
     setUser({ ...user, [name]: value });
   };
-  const handleSubmit = () => {};
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ ...user }),
+      });
+      if (res.status === 200) {
+        setUser({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch (err: unknown) {
+      console.log(err);
+      setStatus("error");
+    }
+  };
 
   return (
     <form
-      className="w-[340px] h-[33rem] rounded-lg shadow-2xl mx-auto py-[20px] px-[30px] box-border max-w-80 my-8"
+      className="w-[340px] h-[37rem] rounded-lg shadow-2xl mx-auto py-[20px] px-[30px] box-border max-w-80 my-8"
       onSubmit={handleSubmit}
     >
       <h1 className="flex justify-center font-semibold my-4 border-[#bebed2] border-b-2 pb-2">
@@ -91,7 +115,17 @@ const ContactForm = () => {
           required
         ></textarea>
       </div>
-      <div className="my-3 flex justify-center">
+      <div className="my-3 text-center">
+        {status === "success" && (
+          <p className="text-green-300 my-2 text-xs">
+            Congrats! You&apos;ll be contacted by our team shortly.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-rose-600 my-2 text-xs">
+            Oops! Some error occurred
+          </p>
+        )}
         <button
           className="p-2 bg-slate-950 text-slate-50 hover:bg-slate-100 hover:text-slate-950 hover:border-2 hover:border-slate-950 rounded-[1.5rem]"
           type="submit"
